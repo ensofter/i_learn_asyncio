@@ -16,14 +16,14 @@ app_storage = {}
 
 async def create_table():
     async with aiosqlite.connect('weather1.db') as db:
-        logger.info('Создаем базку')
+        await logger.info('Создаем базку')
         await db.execute('CREATE TABLE IF NOT EXISTS requests (date text, city text, weather text)')
         await db.commit()
 
 
 async def save_to_db(city, weather):
     async with aiosqlite.connect('weather1.db') as db:
-        logger.info('Добавляем запись в базку')
+        await logger.info('Добавляем запись в базку')
         await db.execute('INSERT INTO requests VALUES (?, ?, ?)', (datetime.now(), city, weather))
         await db.commit()
 
